@@ -16,7 +16,7 @@ function displayQuestion() {
   
   // For question 2 (index 1), add an image (ensure images/christian.jpg exists)
   if (currentQuestion === 1) {
-    questionHTML += `<img src="images/christian.jpg" alt="Christian" width="100" height="100" class="centered">`;
+    questionHTML += `<img src="assets/christian.jpg" alt="Christian" width="100" height="100" class="centered">`;
   }
   
   questionHTML += `
