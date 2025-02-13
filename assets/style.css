@@ -86,3 +86,28 @@ img.centered {
   display: block;
   margin: 0 auto 20px;
 }
+/* Link Button Styling */
+.btn-link {
+  display: inline-block;
+  background-color: #c0392b;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 1em;
+  transition: background 0.3s, transform 0.3s;
+  margin-bottom: 20px;
+  animation: pulseLink 2s infinite;
+}
+
+.btn-link:hover {
+  background-color: #a93226;
+  transform: scale(1.15);
+}
+
+/* Keyframes for the link pulse animation */
+@keyframes pulseLink {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}

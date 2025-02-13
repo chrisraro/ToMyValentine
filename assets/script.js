@@ -6,17 +6,30 @@ const questions = [
   "Awesome! Will you be my Valentine?"
 ];
 
+// GIF URLs for each question (place your GIF files in the assets folder)
+const gifURLs = [
+  "assets/images/doraemonquestionig.gif",
+  "",
+  "assets/images/DoraemonBlush.gif",
+  "assets/images/doraemonwithrose.gif"
+];
+
 let responses = [];
 let currentQuestion = 0;
 const contentDiv = document.getElementById("content");
 
-// Function to display a question with Yes/No buttons.
+// Display a question with Yes/No buttons and a GIF.
 function displayQuestion() {
   let questionHTML = `<p class="question">${questions[currentQuestion]}</p>`;
   
-  // For the second question (index 1), include the image.
+  // Add the GIF for this question (if available)
+  if (gifURLs[currentQuestion]) {
+    questionHTML += `<img src="${gifURLs[currentQuestion]}" alt="Question GIF" width="200" height="200" class="centered gif">`;
+  }
+  
+  // For the second question (index 1), also include a static image (e.g., Christian's photo)
   if (currentQuestion === 1) {
-    questionHTML += `<img src="assets/christian.jpg" alt="Christian" width="100" height="100" class="centered">`;
+    questionHTML += `<img src="assets/images/christian.jpg" alt="Christian" width="250" height="200" class="centered">`;
   }
   
   questionHTML += `
@@ -34,29 +47,41 @@ function displayQuestion() {
     nextStep();
   });
   
+  // When "No" is clicked, trigger the special effect.
   document.getElementById("noBtn").addEventListener("click", askWhyNo);
 }
 
-// Function to handle a "No" response by prompting the user repeatedly.
+// Handle a "No" response with a fun animation effect.
 function askWhyNo() {
+  // Display the re-prompt view with two buttons.
   contentDiv.innerHTML = `
     <p class="question">Why are you saying "No"?</p>
+    <img src="assets/images/DoraemonCry.gif" alt="No Response GIF" width="200" height="200" class="centered gif">
     <div class="btn-group">
       <button id="changeMindBtn">Yes, I'll change my mind</button>
       <button id="stayNoBtn">No</button>
     </div>
   `;
   
+  // When the "Yes, I'll change my mind" button is clicked, proceed normally.
   document.getElementById("changeMindBtn").addEventListener("click", () => {
     responses.push({ question: questions[currentQuestion], answer: "Yes (after rethinking)" });
     currentQuestion++;
     nextStep();
   });
   
-  document.getElementById("stayNoBtn").addEventListener("click", askWhyNo);
+  // When the "No" button is clicked, change its text and animate the "Yes" button.
+  document.getElementById("stayNoBtn").addEventListener("click", function() {
+    this.textContent = "Come on, just say YES!";
+    const yesButton = document.getElementById("changeMindBtn");
+    yesButton.classList.add("enlarge");
+    setTimeout(() => {
+      yesButton.classList.remove("enlarge");
+    }, 500);
+  });
 }
 
-// Function to determine the next step: next question or contact form.
+// Decide whether to display the next question or the contact form.
 function nextStep() {
   if (currentQuestion < questions.length) {
     displayQuestion();
@@ -65,17 +90,17 @@ function nextStep() {
   }
 }
 
-// Function to display the contact form.
+// Display the contact form with a GIF.
 function displayContactForm() {
   contentDiv.innerHTML = `
-    <p>Please enter your name and email:</p>
+    <p>Please enter your email:</p>
     <form id="contactForm">
-      <input type="text" name="userName" id="userName" placeholder="Your Name" required><br>
-      <input type="email" name="userEmail" id="userEmail" placeholder="your.email@example.com" required><br>
-      <!-- Using a hidden textarea to store the invitation letter -->
+      <input type="email" name="userEmail" id="userEmail" placeholder="" required><br>
+      <!-- Hidden textarea to store the invitation letter -->
       <textarea name="letter" id="letter" style="display:none;"></textarea>
       <input type="submit" value="Submit">
     </form>
+    <img src="assets/images/DoraemonThankyou.gif" width="200" height="200" alt="Contact GIF" class="centered gif">
   `;
   
   const contactForm = document.getElementById("contactForm");
@@ -83,7 +108,6 @@ function displayContactForm() {
     e.preventDefault();
     
     // Retrieve form values.
-    const name = document.getElementById("userName").value;
     const userEmail = document.getElementById("userEmail").value;
     
     // Compose the invitation letter.
@@ -97,7 +121,9 @@ function displayContactForm() {
 Dear ${name},
 
 I hope this message finds you well. My name is Christian, and with Valentine’s Day just around the corner, I would be honored to have you join me in celebrating this special occasion. Today is ${dateStr}, and I can’t help but imagine how delightful it would be to spend this day with you.
+
 Your charm and kindness have truly captured my attention, and I sincerely hope you will accept my invitation to be my Valentine. I promise an evening filled with engaging conversation, laughter, and memorable moments.
+
 Please let me know if you can join me on this wonderful day.
 
 With heartfelt anticipation,
@@ -109,19 +135,25 @@ Christian
     document.getElementById("letter").value = letterContent;
     
     // Send the email using EmailJS.
-    // Ensure that your EmailJS template is configured to use:
-    // - userEmail (for the recipient's email address),
-    // - userName, and
-    // - letter (for the message body).
     emailjs.sendForm('service_86b7qvi', 'template_8wtm1d4', this)
       .then(function(response) {
         console.log('SUCCESS!', response.status, response.text);
-        alert("Your invitation has been sent successfully to " + userEmail + "!");
+        showSuccess(userEmail);
       }, function(error) {
         console.log('FAILED...', error);
         alert("Failed to send invitation. Please try again later.");
       });
   });
+}
+
+// Display the closing flow with an "Open Gmail" button.
+function showSuccess(userEmail) {
+  contentDiv.innerHTML = `
+    <div class="success-container">
+      <a href="https://mail.google.com/" target="_blank" class="btn-link">Open Gmail</a>
+      <img src="assets/images/DoraemonSeeyou.gif" alt="Success GIF" width="200" height="200" class="centered gif">
+    </div>
+  `;
 }
 
 // Start the questionnaire.
