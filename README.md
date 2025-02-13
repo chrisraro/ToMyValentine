@@ -21,7 +21,7 @@
 
    ```bash
    git clone https://github.com/yourusername/ToMyValentine.git
-   cd ToMyValentine
+
 
 ToMyValentine/
 ├── index.html
