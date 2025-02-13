@@ -29,7 +29,7 @@ function displayQuestion() {
   
   // For the second question (index 1), also include a static image (e.g., Christian's photo)
   if (currentQuestion === 1) {
-    questionHTML += `<img src="assets/images/christian.jpg" alt="Christian" width="250" height="200" class="centered">`;
+    questionHTML += `<img src="assets/images/christian1.jpg" alt="Christian" width="250" height="200" style=border-radius:20px; class="centered">`;
   }
   
   questionHTML += `
