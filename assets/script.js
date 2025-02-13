@@ -2,7 +2,7 @@
 const questions = [
   "Am I interacting with Jewel Maxine Fortuna right now?",
   "Hello, I'm Christian. Do you recognize me?",
-  "Thank you for recognizing a beautiful lady. Are you available on Friday, February 14?",
+  "Thank you for noticing me, beautiful lady. Are you available on Friday, February 14th?",
   "Awesome! Will you be my Valentine?"
 ];
 
@@ -118,16 +118,15 @@ function displayContactForm() {
       day: "numeric"
     });
     const letterContent = `
-Dear ${name},
+Dear Jewel,
 
-I hope this message finds you well. My name is Christian, and with Valentine’s Day just around the corner, I would be honored to have you join me in celebrating this special occasion. Today is ${dateStr}, and I can’t help but imagine how delightful it would be to spend this day with you.
+With Valentine's Day right around the corner, I can't help but think how delightful it would be to celebrate this special day with you on Friday, February 14th.
 
-Your charm and kindness have truly captured my attention, and I sincerely hope you will accept my invitation to be my Valentine. I promise an evening filled with engaging conversation, laughter, and memorable moments.
+Your charm and kindness never cease to amaze me, and I'd be thrilled to have you as my Valentine. I promise an evening filled with engaging conversation, laughter, and unforgettable moments.
 
-Please let me know if you can join me on this wonderful day.
+Please let me know if you'll join me in making this day truly special.
 
-With heartfelt anticipation,
-
+With all my love,
 Christian
     `;
     
