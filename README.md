@@ -3,7 +3,7 @@
 **ToMyValentine** is a personal interactive Valentine's invitation web app built with HTML, CSS, and JavaScript. Designed exclusively for my partner, it features playful questionnaire animations, engaging GIFs, and EmailJS integration to send a personalized invitation email—a heartfelt project crafted with love.
 
 # Live Preview 
-- https://chrisraro.github.io/ToMyValentine/
+-  [ToMyValentine](https://chrisraro.github.io/ToMyValentine/)
 ## Features
 
 - **Interactive Questionnaire:**  
